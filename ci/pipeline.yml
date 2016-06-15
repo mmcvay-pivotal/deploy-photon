@@ -222,7 +222,7 @@ jobs:
     passed: [p2-task2-Upload-PCF]
   - get: deploy-photon
     trigger: false
-  - task: p2-3-1-deploy-ERT
+  - task: p2-3-deploy-ERT
     config:
       platform: linux
       image: docker:///virtmerlin/deploy-worker
@@ -241,7 +241,17 @@ jobs:
         pcf_manifest: {{pcf_manifest}}
         cli_url: {{cli_url}}
 
-  - task: p2-3-2-test-ERT
+- name: p2-task4-test-ERT
+  serial: true
+  max_in_flight: 1
+  serial_groups: [full]
+  plan:
+  - get: photon-run-id
+    trigger: true
+    passed: [p2-task3-Deploy-PCF]
+  - get: deploy-photon
+    trigger: false
+  - task: run-errands
     config:
       platform: linux
       image: docker:///virtmerlin/deploy-worker
