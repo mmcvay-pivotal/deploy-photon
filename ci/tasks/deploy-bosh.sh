@@ -62,9 +62,6 @@ perl -pi -e "s/BOSH_DEPLOYMENT_USER/$bosh_deployment_user/g" /tmp/bosh.yml
 perl -pi -e "s/BOSH_DEPLOYMENT_PASSWD/$bosh_deployment_passwd/g" /tmp/bosh.yml
 
 # Deploy BOSH
-echo "BEGIN Print bosh.yml ..."
-cat /tmp/bosh.yml
-echo "END Print bosh.yml ..."
 echo "Deploying BOSH ..."
 bosh-init deploy /tmp/bosh.yml
 
