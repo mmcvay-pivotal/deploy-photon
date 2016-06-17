@@ -31,6 +31,8 @@ PHOTON_PROJ_ID=$(photon project list | grep $photon_project |  awk -F " " '{prin
 bosh_deployment_network=$(echo ${bosh_deployment_network} | tr "_" "-")
 photon network create -n $bosh_deployment_network_name -p "$bosh_deployment_network" -d "BOSH Deployment Network" || echo "Photon Network $bosh_deployment_network Already Exists ..."
 BOSH_DEPLOYMENT_NETWORK_ID=$(photon network list | grep "$bosh_deployment_network" | awk -F " " '{print$1}')
+echo "BEGIN vvvvvvvvvvvvvvvvvvvv"
+echo $BOSH_DEPLOYMENT_NETWORK_ID
 
 #### Edit Bosh Manifest & Deploy BOSH
 echo "Updating BOSH Manifest template deploy-photon/manifests/bosh/$bosh_manifest ..."
@@ -60,6 +62,9 @@ perl -pi -e "s/BOSH_DEPLOYMENT_NETWORK_DNS/$bosh_deployment_network_dns/g" /tmp/
 perl -pi -e "s/BOSH_DEPLOYMENT_NETWORK_IP/$bosh_deployment_network_ip/g" /tmp/bosh.yml
 perl -pi -e "s/BOSH_DEPLOYMENT_USER/$bosh_deployment_user/g" /tmp/bosh.yml
 perl -pi -e "s/BOSH_DEPLOYMENT_PASSWD/$bosh_deployment_passwd/g" /tmp/bosh.yml
+
+cat /tmp/bosh.yml
+echo "END ^^^^^^^^^^^^^^^^^"
 
 # Deploy BOSH
 echo "Deploying BOSH ..."
