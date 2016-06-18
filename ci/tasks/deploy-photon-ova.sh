@@ -7,8 +7,6 @@ if [[ $ova_url == "latest" || -z "$ova_url" ]]; then
   echo "Using default url."
   ova_url=$(wget -q -O- https://github.com/vmware/photon-controller/wiki/download | grep "install-vm.ova" | egrep -o http.*\" | tr -d "\"")
 fi
-# PRASAD
-ova_url="https://bintray.com/photon-controller/esxcloud-archives/download_file?file_path=v0.9.0%2F106%2Finstaller-vm.ova"
 
 wget ${ova_url} -O /tmp/installer-vm.ova
 
