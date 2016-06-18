@@ -28,7 +28,7 @@ photon project set $photon_project
 PHOTON_PROJ_ID=$(photon project list | grep $photon_project |  awk -F " " '{print$1}')
 
 #### Create Photon Network
-bosh_deployment_network=$(echo ${bosh_deployment_network} | tr "_" "-")
+bosh_deployment_network_name=$(echo ${bosh_deployment_network} | tr "_" "-")
 photon network create -n $bosh_deployment_network_name -p "$bosh_deployment_network" -d "BOSH Deployment Network" || echo "Photon Network $bosh_deployment_network Already Exists ..."
 BOSH_DEPLOYMENT_NETWORK_ID=$(photon network list | grep "$bosh_deployment_network" | awk -F " " '{print$1}')
 echo "BEGIN vvvvvvvvvvvvvvvvvvvv"
