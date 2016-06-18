@@ -7,6 +7,10 @@ my_dir="$(dirname "$0")"
 
 #### Build the Photon CPI and get sha1
 echo "Building Photon CPI ..."
+echo $photon_release
+photon_release="0.9.0"
+echo $photon_release
+echo "Building Photon CPI ..."
 if [[ $photon_release == "latest" || -z $photon_release ]]; then
         CPI_FILE=$(ls bosh-photon-cpi-release/releases/bosh-photon-cpi/bosh-photon-cpi-*.yml | sort | head -1)
 else
@@ -33,6 +37,8 @@ photon network create -n $bosh_deployment_network_name -p "$bosh_deployment_netw
 BOSH_DEPLOYMENT_NETWORK_ID=$(photon network list | grep "$bosh_deployment_network" | awk -F " " '{print$1}')
 echo "BEGIN vvvvvvvvvvvvvvvvvvvv"
 echo $BOSH_DEPLOYMENT_NETWORK_ID
+echo $bosh_deployment_network
+echo $bosh_deployment_network_name
 
 #### Edit Bosh Manifest & Deploy BOSH
 echo "Updating BOSH Manifest template deploy-photon/manifests/bosh/$bosh_manifest ..."
