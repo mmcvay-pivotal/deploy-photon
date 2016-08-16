@@ -24,9 +24,11 @@ PHOTON_CTRL_ID=$(photon deployment list | head -3 | tail -1)
 PHOTON_CTRL_IP=$(photon deployment show $PHOTON_CTRL_ID | grep -E "LoadBalancer.*28080" | awk -F " " '{print$2}')
 AUTH_ENABLED=$(photon -n deployment show $PHOTON_CTRL_ID | sed -n 2p | awk '{print $1;}')
 if [ $AUTH_ENABLED == "false" ]; then
-    photon target set http://${PHOTON_CTRL_IP}:9000
+    PHOTON_CTRL_TARGET=http://${PHOTON_CTRL_IP}:9000
+    photon target set $PHOTON_CTRL_TARGET
 else
-    photon -n target set -c https://${PHOTON_CTRL_IP}:443
+    PHOTON_CTRL_TARGET=https://${PHOTON_CTRL_IP}:443
+    photon -n target set -c $PHOTON_CTRL_TARGET
     photon -n target login -u "$photon_user" -p "$photon_passwd"
 fi
 photon tenant set $photon_tenant
@@ -52,7 +54,7 @@ CPI_RELEASE_REGEX=$(echo $CPI_RELEASE | sed 's|/|\\\/|g')
 BOSH_DEPLOYMENT_NETWORK_SUBNET_REGEX=$(echo $bosh_deployment_network_subnet | sed 's|/|\\\/|g' | sed 's|\.|\\\.|g')
 
 perl -pi -e "s/PHOTON_PROJ_ID/$PHOTON_PROJ_ID/g" /tmp/bosh.yml
-perl -pi -e "s/PHOTON_CTRL_IP/$PHOTON_CTRL_IP/g" /tmp/bosh.yml
+perl -pi -e "s|PHOTON_CTRL_TARGET|$PHOTON_CTRL_TARGET|g" /tmp/bosh.yml
 perl -pi -e 's/PHOTON_USER/$ENV{photon_user}/g' /tmp/bosh.yml
 perl -pi -e 's/PHOTON_PASSWD/$ENV{photon_passwd}/g' /tmp/bosh.yml
 perl -pi -e "s/PHOTON_IGNORE_CERT/$photon_ignore_cert/g" /tmp/bosh.yml

@@ -112,7 +112,7 @@ jobs:
       db: *db
 
     photon: &photon
-      target: http://PHOTON_CTRL_IP:9000
+      target: PHOTON_CTRL_TARGET
       user: PHOTON_USER
       password: PHOTON_PASSWD
       ignore_cert: PHOTON_IGNORE_CERT
