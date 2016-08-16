@@ -39,6 +39,7 @@ PHOTON_PROJ_ID=$(photon project list | grep $photon_project |  awk -F " " '{prin
 bosh_deployment_network=$(echo ${bosh_deployment_network} | tr "_" "-")
 photon network create -n $bosh_deployment_network_name -p "$bosh_deployment_network" -d "BOSH Deployment Network" || echo "Photon Network $bosh_deployment_network Already Exists ..."
 BOSH_DEPLOYMENT_NETWORK_ID=$(photon network list | grep "$bosh_deployment_network" | awk -F " " '{print$1}')
+photon -n network set-default $BOSH_DEPLOYMENT_NETWORK_ID
 
 #### Edit Bosh Manifest & Deploy BOSH
 echo "Updating BOSH Manifest template deploy-photon/manifests/bosh/$bosh_manifest ..."
