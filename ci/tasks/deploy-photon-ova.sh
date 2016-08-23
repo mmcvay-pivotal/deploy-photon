@@ -9,7 +9,7 @@ if [[ $ova_url == "latest" || -z "$ova_url" ]]; then
   ova_url=$(wget -q -O- https://github.com/vmware/photon-controller/releases/ | grep -m 1 installer-vm.ova | perl -ne 'print map("$_\n", m/href=\".*?\"/g)' |  tr -d '"' | awk -F "href=" '{print$2}')
 fi
 
-wget ${ova_url} -O /tmp/installer-vm.ova
+wget https://github.com${ova_url} -O /tmp/installer-vm.ova
 
 ovftool --acceptAllEulas --noSSLVerify --skipManifestCheck \
 --X:injectOvfEnv --overwrite --powerOffTarget --powerOn \
