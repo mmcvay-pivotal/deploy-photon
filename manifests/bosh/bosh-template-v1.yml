@@ -51,7 +51,6 @@ jobs:
   - {name: blobstore, release: bosh}
   - {name: director, release: bosh}
   - {name: health_monitor, release: bosh}
-  - {name: powerdns, release: bosh}
   - {name: cpi, release: bosh-photon-cpi}
 
   resource_pool: vms
@@ -74,11 +73,6 @@ jobs:
       password: postgres-password
       database: bosh
       adapter: postgres
-
-    redis:
-      password: redis-password
-      listen_addresss: 127.0.0.1
-      address: 127.0.0.1
 
     blobstore:
       address: BOSH_DEPLOYMENT_NETWORK_IP
@@ -107,10 +101,6 @@ jobs:
       http: {user: hm, password: hm-password}
       director_account: {user: BOSH_DEPLOYMENT_USER, password: BOSH_DEPLOYMENT_PASSWD}
       resurrector_enabled: true
-
-    dns:
-      address: 127.0.0.1
-      db: *db
 
     photon: &photon
       target: http://PHOTON_CTRL_IP:9000
