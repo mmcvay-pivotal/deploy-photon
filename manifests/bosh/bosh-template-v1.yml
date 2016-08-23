@@ -114,8 +114,8 @@ jobs:
 
     photon: &photon
       target: http://PHOTON_CTRL_IP:9000
-      user: PHOTON_USER
-      password: PHOTON_PASSWD
+    #  user: PHOTON_USER
+    #  password: PHOTON_PASSWD
       ignore_cert: PHOTON_IGNORE_CERT
       tenant: PHOTON_TENANT
       project: PHOTON_PROJ_ID
