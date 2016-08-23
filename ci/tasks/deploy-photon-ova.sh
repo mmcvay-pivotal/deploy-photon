@@ -5,7 +5,8 @@ set -e
 echo "Downloading PHOTON Installer ova..."
 if [[ $ova_url == "latest" || -z "$ova_url" ]]; then
   echo "Using default url."
-  ova_url=$(wget -q -O- https://github.com/vmware/photon-controller/wiki/download | grep "install-vm.ova" | egrep -o http.*\" | tr -d "\"")
+  #ova_url=$(wget -q -O- https://github.com/vmware/photon-controller/wiki/download | grep "install-vm.ova" | egrep -o http.*\" | tr -d "\"")
+  ova_url=$(wget -q -O- https://github.com/vmware/photon-controller/releases/ | grep -m 1 installer-vm.ova | perl -ne 'print map("$_\n", m/href=\".*?\"/g);' |  tr -d '"' | awk -F "href=" '{print$2}')
 fi
 
 wget ${ova_url} -O /tmp/installer-vm.ova
