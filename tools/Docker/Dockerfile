@@ -49,7 +49,7 @@ RUN wget $(wget -q -O- https://bosh.io/docs/install-bosh-init.html | grep "bosh-
 RUN chmod 755 /sbin/bosh-init
 
 # Install latest PHOTON go cli
-RUN wget $(wget -q -O- https://github.com/vmware/photon-controller/wiki/download | grep "linux cli tools" | egrep -o http.*\" | tr -d "\"") -O /sbin/photon
+RUN baseURL=$(wget -q -O- https://github.com/vmware/photon-controller/releases/ | grep -m 1 photon-linux | perl -ne 'print map("$_\n", m/href=\".*?\"/g)' |  tr -d '"' | awk -F "href=" '{print$2}') && wget https://github.com$baseURL -O /sbin/photon
 RUN chmod 755 /sbin/photon
 
 # Install Hardcoded version of vSphere CLI tools from Repo.  This is due to bug in perl installer requiring secondary confirmation input
@@ -62,11 +62,6 @@ ADD VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle /tmp/
 RUN yes | /bin/bash /tmp/VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle --required --console && \
     rm -f /tmp/VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle
 
-# Install Azure CLI
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-RUN apt-get -y install git nodejs
-RUN npm install azure-cli -g
-RUN yes | azure
 
 # Exec cmd for Docker container
 CMD ["/bin/bash"]

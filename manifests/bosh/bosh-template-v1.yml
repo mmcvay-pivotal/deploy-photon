@@ -3,8 +3,8 @@ name: bosh
 
 releases:
 - name: bosh
-  url: http://bosh.io/d/github.com/cloudfoundry/bosh?v=256.1
-  sha1: bc1538d32cd030216ac39723d363b6dc70bdcc55
+  url: https://bosh.io/d/github.com/cloudfoundry/bosh?v=257.3
+  sha1: e4442afcc64123e11f2b33cc2be799a0b59207d0
 - name: bosh-photon-cpi
   url: file:///CPI_RELEASE
   sha1: CPI_SHA1
