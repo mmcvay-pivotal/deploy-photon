@@ -124,7 +124,7 @@ jobs:
   - task: p1-2-deploy-photon
     config:
       platform: linux
-      image: docker:///virtmerlin/deploy-worker
+      image: docker:///virtmerlin/deploy-worker-photon
       inputs:
         - name: deploy-photon
       run:

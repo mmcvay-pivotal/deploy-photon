@@ -2,8 +2,9 @@
 set -e
 
 # Download Photon CLI
-my_dir="$(dirname "$0")"
-"$my_dir/download-cli.sh"
+baseURL=$(wget -q -O- https://github.com/vmware/photon-controller/releases/ | grep -m 1 photon-linux | perl -ne 'print map("$_\n", m/href=\".*?\"/g)' |  tr -d '"' | awk -F "href=" '{print$2}')
+wget https://github.com$baseURL -O /sbin/photon
+chmod 755 /sbin/photon
 
 photon target set http://${ova_ip}:9000
 
