@@ -62,6 +62,9 @@ ADD VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle /tmp/
 RUN yes | /bin/bash /tmp/VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle --required --console && \
     rm -f /tmp/VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle
 
+# Install Vault cli
+RUN wget $(wget -O- -q https://www.vaultproject.io/downloads.html | grep linux_amd | awk -F "\"" '{print$2}') -O vault.zip && unzip vault.zip && cp vault /sbin/vault
+RUN chmod 755 /sbin/vault
 
 # Exec cmd for Docker container
 CMD ["/bin/bash"]
