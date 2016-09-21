@@ -39,7 +39,7 @@ photon project list
 
 ## Create Photon Flavors for PCF
 # 000's - ultra small VMs
-# 1 cpu, 8MB memory
+# 1 cpu, 32MB memory
 photon -n flavor create -n core-10 -k vm -c "vm.cpu 1 COUNT,vm.memory 32 MB"
 # 100's - entry level, non-production sla only
 # 1 cpu, 2GB memory, vm.cost = 1.0 baseline
@@ -55,9 +55,9 @@ photon -n flavor create -n core-200 -k vm -c "vm.cpu 2 COUNT,vm.memory 4 GB"
 photon -n flavor create -n core-220 -k vm -c "vm.cpu 2 COUNT,vm.memory 8 GB"
 # 4 cpu, 16GB memory, vm.cost 12.0
 # intention is ~parity with GCE n1-standard-4 (ephemeral root)
-photon -n flavor create -n core-240 -k vm -c "vm.cpu 2 COUNT,vm.memory 16 GB"
+photon -n flavor create -n core-240 -k vm -c "vm.cpu 4 COUNT,vm.memory 16 GB"
 # 4 cpu, 32GB memory, vm.cost 20.0
-photon -n flavor create -n core-245 -k vm -c "vm.cpu 2 COUNT,vm.memory 32 GB"
+photon -n flavor create -n core-245 -k vm -c "vm.cpu 4 COUNT,vm.memory 32 GB"
 # 8 cpu, 32GB memory, vm.cost 25.0
 # intention is ~parity with GCE n1-standard-8 (ephemeral root)
 photon -n flavor create -n core-280 -k vm -c "vm.cpu 8 COUNT,vm.memory 32 GB"
