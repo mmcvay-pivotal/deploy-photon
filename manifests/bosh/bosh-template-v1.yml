@@ -14,7 +14,7 @@ resource_pools:
 - name: vms
   network: default
   stemcell:
-    url: https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent?v=3262.7
+    url: https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent
     sha1: a6e3a39d7694557a5cae0b8f35af619edbc0ca22
   cloud_properties:
     vm_flavor: core-200
