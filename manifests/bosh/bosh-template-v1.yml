@@ -3,19 +3,17 @@ name: bosh
 
 releases:
 - name: bosh
-  url: https://bosh.io/d/github.com/cloudfoundry/bosh?v=257.3
-  sha1: e4442afcc64123e11f2b33cc2be799a0b59207d0
+  url: https://bosh.io/d/github.com/cloudfoundry/bosh?v=257.15
+  sha1: f4cf3579bfac994cd3bde4a9d8cbee3ad189c8b2
 - name: bosh-photon-cpi
-#  url: file:///CPI_RELEASE
-#  sha1: CPI_SHA1
   url: https://s3.amazonaws.com/concourse-photon/bosh-photon-cpi-1.0.0.tgz
   sha1: 71626961a8505447fa34ca569f97f8c70a0ef39a
 resource_pools:
 - name: vms
   network: default
   stemcell:
-    url: https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent
-    sha1: a6e3a39d7694557a5cae0b8f35af619edbc0ca22
+    url: https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent?v=3263.2
+    sha1: 20949bf20abcd349a4b5340c03a401c7b60849a7
   cloud_properties:
     vm_flavor: core-200
     disk_flavor: core-200
