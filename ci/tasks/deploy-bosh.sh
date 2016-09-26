@@ -15,6 +15,7 @@ fi
 echo $CPI_FILE
 cd bosh-photon-cpi-release
 CPI_RELEASE=$(bosh create release ../$CPI_FILE | grep Generated | awk -F " " '{print$2}')
+echo $CPI_RELEASE
 cd ..
 CPI_SHA1=$(openssl sha1 $CPI_RELEASE | awk -F "= " '{print$2}')
 
