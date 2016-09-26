@@ -32,7 +32,7 @@ jobs:
   serial_groups: [full]
   plan:
   - get: photon-run-id
-    trigger: true
+    trigger: false
   - get: deploy-photon
     trigger: false
   - get: bosh-photon-cpi-release
