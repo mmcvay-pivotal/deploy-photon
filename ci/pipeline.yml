@@ -16,12 +16,13 @@ resources:
 - name: photon-run-id
   type: semver
   source:
-    bucket: concourse-photon-skazi
-    key: {{semver_file_name}}
+    branch: version
+    driver: git
+    file: version
     initial_version: 1.0.0
-    access_key_id: {{aws_id}}
-    secret_access_key: {{aws_key}}
-    region_name: eu-west-1 
+    uri: git@github.com:skazi-pivotal/deploy-photon.git
+    private_key: {{githubsshkey}}
+    git_user: skazi@pivotal.io
 
 jobs:
 
