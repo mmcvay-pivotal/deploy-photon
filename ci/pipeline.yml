@@ -2,9 +2,8 @@ resources:
 - name: deploy-photon
   type: git
   source:
-    uri: git@github.com:skazi-pivotal/deploy-photon.git
+    uri: https://github.com/skazi-pivotal/deploy-photon.git
     branch: master
-    private_key: {{githubsshkey}}
 
 - name: bosh-photon-cpi-release
   type: git
