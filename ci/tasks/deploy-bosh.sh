@@ -8,10 +8,11 @@ my_dir="$(dirname "$0")"
 #### Build the Photon CPI and get sha1
 echo "Building Photon CPI ..."
 if [[ $photon_release == "latest" || -z $photon_release ]]; then
-        CPI_FILE=$(ls bosh-photon-cpi-release/releases/bosh-photon-cpi/bosh-photon-cpi-*.yml | sort | head -1)
+        CPI_FILE=$(ls bosh-photon-cpi-release/releases/bosh-photon-cpi/bosh-photon-cpi-*.yml | sort | tail -1)
 else
-        CPI_FILE=$(ls bosh-photon-cpi-release/releases/bosh-photon-cpi/bosh-photon-cpi-$photon_release.yml | sort | head -1)
+        CPI_FILE=$(ls bosh-photon-cpi-release/releases/bosh-photon-cpi/bosh-photon-cpi-$photon_release.yml | sort | tail -1)
 fi
+echo $CPI_FILE
 cd bosh-photon-cpi-release
 CPI_RELEASE=$(bosh create release ../$CPI_FILE | grep Generated | awk -F " " '{print$2}')
 cd ..
