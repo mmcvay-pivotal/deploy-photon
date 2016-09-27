@@ -148,7 +148,7 @@ jobs:
         photon_tenant: {{photon_tenant}}
         photon_project: {{photon_project}}
         cli_url: {{cli_url}}
-	
+
 - name: p2-task1-Deploy-BOSH
   serial: true
   max_in_flight: 1
