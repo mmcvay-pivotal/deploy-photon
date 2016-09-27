@@ -156,6 +156,7 @@ jobs:
   plan:
   - get: photon-run-id
     trigger: false
+    passed: [p1-task1-Deploy-Photon-Installer]
   - get: deploy-photon
     trigger: false
   - get: bosh-photon-cpi-release
