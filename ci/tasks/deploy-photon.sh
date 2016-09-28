@@ -6,14 +6,18 @@ baseURL=$(wget -q -O- https://github.com/vmware/photon-controller/releases/ | gr
 wget https://github.com$baseURL -O /sbin/photon
 chmod 755 /sbin/photon
 
+echo ""
+echo "******** Photon Stuff"
 photon target set http://${ova_ip}:9000
 
 #Destory Existing Deployments
 if (( $(photon -n deployment list | wc -l) > 0 )); then
+	echo "Destroying previous stuff first"
     photon system destroy
 fi
 
 #Deploy Photon Controller
+"Deploying Controller"
 photon system deploy deploy-photon/manifests/photon/$photon_manifest 2>&1
 echo "sleep 3 minutes while photon ctrlrs are starting"
 sleep 180
@@ -22,17 +26,20 @@ sleep 180
 PHOTON_CTRL_ID=$(photon deployment list | head -3 | tail -1)
 PHOTON_CTRL_IP=$(photon deployment show $PHOTON_CTRL_ID | grep -E "LoadBalancer.*28080" | awk -F " " '{print$2}')
 
+echo "Controller Info: ${PHOTON_CTRL_ID} - $PHOTON_CTRL_IP}"
+
 photon target set http://${PHOTON_CTRL_IP}:9000
 
 ##Create Tenant
 photon -n tenant create $photon_tenant
 photon -n tenant set $photon_tenant
+echo "Created tenants"
 
 ##Create Project & Link Resources
 photon -n resource-ticket create --name $photon_project-ticket --limits "vm.memory 3600 GB, vm 10000 COUNT" -t $photon_tenant
 echo 'y' | photon project create --name $photon_project --limits "vm.memory 3600 GB, vm 10000 COUNT" -r $photon_project-ticket
 photon -n project set $photon_project
-
+echo "Created resource ticket and projects"
 
 #Show Project ID
 photon project list
@@ -82,3 +89,5 @@ photon -n flavor create -n core-300 -k ephemeral-disk -c "ephemeral-disk 1 COUNT
 photon -n flavor create -n core-100 -k persistent-disk -c "persistent-disk 1 COUNT"
 photon -n flavor create -n core-200 -k persistent-disk -c "persistent-disk 1 COUNT"
 photon -n flavor create -n core-300 -k persistent-disk -c "persistent-disk 1 COUNT"
+
+echo "Created flavors"
