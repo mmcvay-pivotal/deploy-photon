@@ -2,7 +2,7 @@ resources:
 - name: deploy-photon
   type: git
   source:
-    uri: https://github.com/skazi-pivotal/deploy-photon.git
+    uri: https://github.com/mmcvay-pivotal/deploy-photon.git
     branch: master
 
 - name: bosh-photon-cpi-release
@@ -18,11 +18,11 @@ resources:
   source:
     driver: git
     initial_version: 1.0.0
-    uri: git@github.com:skazi-pivotal/deploy-photon.git
+    uri: git@github.com:mmcvay-pivotal/deploy-photon.git
     branch: version
     file: version
     private_key: {{githubsshkey}}
-    git_user: skazi@pivotal.io
+    git_user: mmcvay@pivotal.io
 
 jobs:
 - name: WipeEnv-Only
