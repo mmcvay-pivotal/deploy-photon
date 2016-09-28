@@ -8,7 +8,7 @@ deployment:
   stats_enabled: false
   loadbalancer_enabled: true
 hosts:
-- address_ranges: 10.65.162.105
+- address_ranges: 10.65.162.104
   username: root
   password: d3v0ps!
   usage_tags:
