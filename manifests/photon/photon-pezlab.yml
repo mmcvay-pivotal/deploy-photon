@@ -8,7 +8,7 @@ deployment:
   stats_enabled: false
   loadbalancer_enabled: true
 hosts:
-- address_ranges: 10.65.148.11
+- address_ranges: 10.65.148.10
   username: root
   password: PsBe69WrXPcq!
   usage_tags:
